@@ -1,8 +1,9 @@
+import HomePage from "./components/templates/HomePage"
 
 function App() {
-  const [count, setCount] = useState(0)
+  
 
-  return <h1>Crypto App</h1>
+  return <HomePage/>
    
 }
 
