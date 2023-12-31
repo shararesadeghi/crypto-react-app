@@ -2,6 +2,8 @@ import { useEffect, useState } from "react";
 import { searchCoin } from "../../services/cryptoApi";
 import { RotatingLines } from "react-loader-spinner";
 
+import styles from './Search.module.css';
+
 const Search = ({ currency, setCurrency }) => {
   const [text, setText] = useState("");
   const [coins, setCoins] = useState([]);
@@ -37,7 +39,7 @@ const Search = ({ currency, setCurrency }) => {
     return () => controller.abort();
   }, [text]);
   return (
-    <div>
+    <div className={styles.searchBox}>
       <input
         placeholder="Search"
         type="text"
@@ -49,7 +51,7 @@ const Search = ({ currency, setCurrency }) => {
         <option vlaue="eur">EUR</option>
         <option value="jpy">JPY</option>
       </select>
-      <div>
+      <div className={styles.searchResult}>
         {isLoading && <RotatingLines strokeWidth="2" strokeColor="#3874ff" />}
         <ul>
           {coins.map((coin) => (
