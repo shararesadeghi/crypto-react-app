@@ -4,7 +4,7 @@ import {RotatingLines} from 'react-loader-spinner';
 
 import styles from './TableCoin.module.css';
 
-const TableCoin = ({ coins, isLoading }) => {
+const TableCoin = ({ coins, isLoading}) => {
   return (
     <div className={styles.container}>
       {isLoading ? (
@@ -41,7 +41,7 @@ const TableRow = ({
     current_price,
     total_volume,
     price_change_percentage_24h: price_change,
-  },
+  }
 }) => {
   return (
     <tr>
