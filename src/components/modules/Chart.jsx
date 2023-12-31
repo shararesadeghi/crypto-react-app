@@ -1,17 +1,26 @@
-import { useState } from 'react';
-import styles from './Chart.module.css';
-import { CartesianGrid, Legend, Line, LineChart, ResponsiveContainer, Tooltip, XAxis, YAxis } from 'recharts';
-import { convertData } from '../../helpers/covertData';
+import { useState } from "react";
+import styles from "./Chart.module.css";
+import {
+  CartesianGrid,
+  Legend,
+  Line,
+  LineChart,
+  ResponsiveContainer,
+  Tooltip,
+  XAxis,
+  YAxis,
+} from "recharts";
+import { convertData } from "../../helpers/covertData";
 
-const Chart = ({chart,setChart}) => {
-    const [type,setType] = useState("prices");
+const Chart = ({ chart, setChart }) => {
+  const [type, setType] = useState("prices");
 
-    const typeHandler = event=>{
-      if(event.target.tagName === "BUTTON"){
-        const type = event.target.innerText.toLowerCase().replace(" ","_");
-        setType(type);
-      }
+  const typeHandler = (event) => {
+    if (event.target.tagName === "BUTTON") {
+      const type = event.target.innerText.toLowerCase().replace(" ", "_");
+      setType(type);
     }
+  };
 
   return (
     <div className={styles.container}>
@@ -27,48 +36,53 @@ const Chart = ({chart,setChart}) => {
           <ChartComponent data={convertData(chart, type)} type={type} />
         </div>
         <div className={styles.types} onClick={typeHandler}>
-          <button className={type === "prices" ? styles.selected : null}>Prices</button>
-          <button className={type === "market_caps" ? styles.selected : null}>Market Caps</button>
-          <button className={type === "total_volumes" ? styles.selected : null}>Total Volumes</button>
+          <button className={type === "prices" ? styles.selected : null}>
+            Prices
+          </button>
+          <button className={type === "market_caps" ? styles.selected : null}>
+            Market Caps
+          </button>
+          <button className={type === "total_volumes" ? styles.selected : null}>
+            Total Volumes
+          </button>
         </div>
         <div className={styles.details}>
           <div>
-          <p>Prices:</p>
-          <span>$ {chart.coin.current_price}</span>
-        </div>
-        <div>
-          <p>ATH:</p>
-          <span>$ {chart.coin.ath}</span>
-        </div>
-        <div>
-          <p>Market Cap:</p>
-          <span>{chart.coin.market_cap}</span>
-        </div>
+            <p>Prices:</p>
+            <span>$ {chart.coin.current_price}</span>
+          </div>
+          <div>
+            <p>ATH:</p>
+            <span>$ {chart.coin.ath}</span>
+          </div>
+          <div>
+            <p>Market Cap:</p>
+            <span>{chart.coin.market_cap}</span>
+          </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
 export default Chart;
 
-
-const ChartComponent = ({data,type})=>{
-    return (
-      <ResponsiveContainer height="100%" width="100%">
-        <LineChart width={400} height={400} data={data}>
-          <Line
-            type="monotone"
-            dataKey={type}
-            stroke="#3874ff"
-            strokeWidth="2px"
-          />
-          <CartesianGrid stroke="#404042" />
-          <YAxis dtatKey={type} domain={["auto", "auto"]} />
-          <XAxis dataKey="date" hide />
-          <Legend />
-          <Tooltip />
-        </LineChart>
-      </ResponsiveContainer>
-    );
-}
+const ChartComponent = ({ data, type }) => {
+  return (
+    <ResponsiveContainer height="100%" width="100%">
+      <LineChart width={400} height={400} data={data}>
+        <Line
+          type="monotone"
+          dataKey={type}
+          stroke="#3874ff"
+          strokeWidth="2px"
+        />
+        <CartesianGrid stroke="#404042" />
+        <YAxis dtatKey={type} domain={["auto", "auto"]} />
+        <XAxis dataKey="date" hide />
+        <Legend />
+        <Tooltip />
+      </LineChart>
+    </ResponsiveContainer>
+  );
+};
